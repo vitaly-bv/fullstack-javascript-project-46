@@ -1,23 +1,13 @@
 #!/usr/bin/env node
 
-import { program } from 'commander';
+import { Command } from 'commander';
 
-// const program = new Command();
+const program = new Command();
 
 program
-  .option('-h, --help', 'output usage information')
-  .option('-f, --format <type>', 'output format')
-  .parse();
 
-const options = program.opts(); 
+  .version('0.0.1', '-V, --version', 'output the version number')
 
-if (options.help) {
-  const textHelp = `Usage: gendiff [options]
+  .description('Compares two configuration files and shows a difference.');
 
-Compares two configuration files and shows a difference.
-
-Options:
-  -V, --version        output the version number
-  -h, --help           output usage information`;
-  console.log(textHelp);
-};
+program.parse();

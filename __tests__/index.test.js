@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { test, expect } from '@jest/globals';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import genDiff from '../src/genDiff.js';
@@ -7,15 +8,29 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const getFixturesPath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
-// файл = стрелочную функцию гнде path объединяем все через dirname
-const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
+const readFile = (filename) => fs.readFileSync(getFixturesPath(filename), 'utf-8');
 
-const filepath1 = getFixturesPath('file1.json');
-const filepath2 = getFixturesPath('file2.json');
-// const filepath3 = getFixturesPath('file1.yaml');
-// const filepath4 = getFixturesPath('file1.yaml');
+const jsonFilepath1 = getFixturesPath('file1.json');
+const jsonFilepath2 = getFixturesPath('file2.json');
+const ymlFilepath1 = getFixturesPath('file1.yml');
+const ymlFilepath2 = getFixturesPath('file2.yml');
 
-/// const stylish ///
+const stylishResult = readFile('stylish-result.txt', 'utf-8');
+const plainResult = readFile('plain-result.txt', 'utf-8');
+const jsonResult = readFile('json-result.txt', 'utf-8');
 
-// удалить перенос строки с помощью trim() обрезав лишние пробелы
-// после получения содержимого фикстур
+test('genDiff JSON and YML to json', () => {
+  expect(genDiff(jsonFilepath1, jsonFilepath2, 'json')).toEqual(jsonResult);
+  expect(genDiff(ymlFilepath1, ymlFilepath2, 'json')).toEqual(jsonResult);
+});
+
+
+test('genDiff JSON and YML to stylish', () => {
+  expect(genDiff(jsonFilepath1, jsonFilepath2)).toEqual(stylishResult);
+  expect(genDiff(ymlFilepath1, ymlFilepath2)).toEqual(stylishResult);
+});
+
+test('genDiff JSON and YML to plain', () => {
+  expect(genDiff(jsonFilepath1, jsonFilepath2, 'plain')).toEqual(plainResult);
+  expect(genDiff(ymlFilepath1, ymlFilepath2, 'plain')).toEqual(plainResult);
+});

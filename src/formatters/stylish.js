@@ -1,14 +1,14 @@
 import _ from 'lodash';
 
-const makeIndent = (depth, replacer = ' ', spaceCount = 4) => replacer.repeat(depth * spacesCount - 2);
-// или '  '.repeat(depth * 2 - 1) ???  
+const makeIndent = (depth, replacer = ' ', spacesCount = 4) => replacer.repeat(depth * spacesCount - 2);
+// или '  '.repeat(depth * 2 - 1) ???
 
 // stringify преобразуем js в json строку
-const makeString = (data, stylish, depth = 1) => { 
+const makeString = (data, stylish, depth = 1) => {
   if (!_.isObject(data)) {
     return data;
   }
-  const keys = Object.keys(data); 
+  const keys = Object.keys(data);
   const result = keys.map((name) => {
     const value = data[name];
     return stylish({ value, name, type: 'unchanged' }, depth + 1);
@@ -16,18 +16,20 @@ const makeString = (data, stylish, depth = 1) => {
   return `{\n${result.join('\n')}\n  ${makeIndent(depth)}}`;
 };
 
-const makeStylish = (diff, depth = 0) => {
+// экспортируем ф-ю stylish
+
+const stylish = (diff, depth = 0) => {
   const {
     name, value, type, value1, value2, children,
-  } = diff; // не совсем пойму пока
+  } = diff; // не совсем пойму пока как спиздил
 
   switch (type) {
     case 'root': {
-      const resultLine = children.flatMap((child) => makeStylish(child, depth + 1));
+      const resultLine = children.flatMap((child) => stylish(child, depth + 1));
       return `{\n${resultLine.join('\n')}\n}`;
     }
     case 'nested': {
-      const resultLine = children.flatMap((child) => makeStylish(child, depth + 1));
+      const resultLine = children.flatMap((child) => stylish(child, depth + 1));
       return `${makeIndent(depth)}  ${name}: {\n${resultLine.join('\n')}\n${makeIndent(depth)}  }`;
     }
     case 'added':
@@ -46,7 +48,4 @@ const makeStylish = (diff, depth = 0) => {
   }
 };
 
-
-export default makeStylish;
-
-
+export default stylish;

@@ -1,10 +1,10 @@
-import stylish from './stylish.js';
+import makeStylish from './stylish.js';
 import plain from './plain.js';
 
 const chooseFormat = (data, format) => {
   switch (format) {
-    case 'stylish':
-      return stylish(data);
+    case 'makeStylish':
+      return makeStylish(data);
     case 'plain':
       return plain(data);
     case 'json':

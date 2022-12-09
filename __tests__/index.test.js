@@ -24,7 +24,6 @@ test('genDiff JSON and YML to json', () => {
   expect(genDiff(ymlFilepath1, ymlFilepath2, 'json')).toEqual(jsonResult);
 });
 
-
 test('genDiff JSON and YML to stylish', () => {
   expect(genDiff(jsonFilepath1, jsonFilepath2)).toEqual(stylishResult);
   expect(genDiff(ymlFilepath1, ymlFilepath2)).toEqual(stylishResult);

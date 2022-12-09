@@ -40,5 +40,4 @@ const plain = (diff, fileName = []) => {
   }
 };
 
-export default plain; 
-
+export default plain;

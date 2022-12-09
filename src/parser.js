@@ -1,4 +1,4 @@
-import yaml from 'js-yaml';
+import { load } from 'js-yaml'; // import yaml ???
 
 const getParser = (data, format) => {
   switch (format) {
@@ -6,7 +6,7 @@ const getParser = (data, format) => {
       return load(data);
     case 'yaml':
       return load(data);
-    case 'json'
+    case 'json':
       return JSON.parse(data);
     default:
       throw new Error('Unknown format. You can use only JSON or YAML formats.');

@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/vitaly-bv/fullstack-javascript-project-46#readme",
   "dependencies": {
+    "@jest/globals": "^29.3.1",
     "commander": "^9.4.1",
     "eslint": "^8.29.0",
     "eslint-config-airbnb-base": "^15.0.0",

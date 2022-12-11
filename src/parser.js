@@ -9,7 +9,7 @@ const getParser = (data, format) => {
     case 'yml':
       return load(data);
     default:
-      return Error('Unknown format. You can use only JSON or YAML formats.');
+      throw new Error('Unknown format. You can use only JSON or YAML formats.');
   }
 };
 

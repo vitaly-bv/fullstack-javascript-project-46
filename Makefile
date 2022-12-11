@@ -4,6 +4,9 @@ install:
 publish:
 	npm publish --dry-run
 
+gendiff:
+	node bin/gendiff.js
+
 lint:
 	npx eslint .
 
@@ -15,3 +18,6 @@ test:
 
 test-coverage:
 	npm test -- --coverage --coverageProvider=v8
+
+test-watch:
+	npm test -- --watch

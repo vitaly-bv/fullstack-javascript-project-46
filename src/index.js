@@ -4,8 +4,8 @@ import diffTree from './getDiff.js';
 import getParse from './parser.js';
 import chooseFormat from './formatters/index.js';
 
-const getFilePath = (filepath) => path.resolve(process.cwd(), filepath); // trim();
-const getFileFormat = (filepath) => path.extname(filepath); // .slice(1)
+const getFilePath = (filepath) => path.resolve(process.cwd(), filepath).trim(); // trim();
+const getFileFormat = (filepath) => path.extname(filepath).slice(1); // .slice(1)
 const readFile = (filepath) => fs.readFileSync(getFilePath(filepath), 'utf-8');
 
 const genDiff = (filepath1, filepath2, format = 'stylish') => {

@@ -11,7 +11,7 @@ const makeString = (data, stylish, depth = 1) => {
   const keys = Object.keys(data);
   const result = keys.map((name) => {
     const value = data[name];
-    return stylish({ value, name, type: 'unchanged' }, depth + 1);
+    return stylish({ name, value, type: 'unchanged' }, depth + 1);
   });
   return `{\n${result.join('\n')}\n  ${makeIndent(depth)}}`;
 };
